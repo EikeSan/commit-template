@@ -4,7 +4,11 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,13 +19,23 @@ public class CommitPanel {
     private JComboBox changeType;
     private JComboBox changeScope;
     private JTextField shortDescription;
-    private JTextArea longDescription;
     private JTextField closedIssues;
     private JTextArea breakingChanges;
-    private JTextArea projectVersion;
+    private JPanel projectCommit;
     private JButton addButton;
+    private List<ProjectCommitModel>  projectCommitModels = new ArrayList<>();
 
     CommitPanel(Project project) {
+
+        addButton = new JButton();
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                addButtonActionPerformed(actionEvent);
+            }
+        });
+
+        addButtonActionPerformed(null);
         for (ChangeType type : ChangeType.values()) {
             changeType.addItem(type);
         }
@@ -32,12 +46,22 @@ public class CommitPanel {
         }
     }
 
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        projectCommit = new ProjectCommit().getProjectCommitPanel();
+        projectCommit.setVisible(true);
+
+        mainPanel.setLayout(mainPanel.getLayout());
+        mainPanel.add(projectCommit);
+        mainPanel.revalidate();
+        mainPanel.repaint();
+    }
+
     JPanel getMainPanel() {
         return mainPanel;
     }
 
     private List<ProjectCommitModel> getProjectCommits() {
-        return null;
+        return this.projectCommitModels;
     }
 
     CommitMessage getCommitMessage() {

@@ -1,11 +1,10 @@
 <idea-plugin>
-    <id>org.example.commit-template</id>
-    <name>Plugin display name here</name>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <id>atom.plugins.commit-template</id>
+    <name>Audora Commit Template</name>
+    <vendor email="support@yourcompany.com" url="http://audora.com.br/img/logo.png">Audora</vendor>
 
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    Plugin com template para commits.<br>
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
@@ -17,6 +16,11 @@
     </extensions>
 
     <actions>
-        <!-- Add your actions here -->
+        <action id="Commit.Button" class="atom.plugins.commit.CreateCommitAction"
+                text="Create commit message"
+                description="Create commit message"
+                icon="PluginIcons.LOAD">
+            <add-to-group group-id="Vcs.MessageActionGroup" anchor="first"/>
+        </action>
     </actions>
 </idea-plugin>

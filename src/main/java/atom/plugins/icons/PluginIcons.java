@@ -1,4 +1,4 @@
-package icons;
+package atom.plugins.icons;
 
 import com.intellij.openapi.util.IconLoader;
 

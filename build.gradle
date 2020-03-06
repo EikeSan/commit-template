@@ -3,8 +3,8 @@ plugins {
     id 'org.jetbrains.intellij' version '0.4.16'
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+group 'atom'
+version '1.0.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
@@ -20,8 +20,17 @@ dependencies {
 intellij {
     version '2019.3.3'
 }
+
+test() {
+    useJUnit()
+
+    maxHeapSize = '1G'
+}
+
 patchPluginXml {
     changeNotes """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
+      Add Project commit.<br>
+      <li>longDescription</li>
+      <li>projectVersion</li>
+      """
 }

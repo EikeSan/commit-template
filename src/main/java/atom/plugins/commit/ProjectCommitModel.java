@@ -1,6 +1,15 @@
 package atom.plugins.commit;
 
 public class ProjectCommitModel {
+
+    public ProjectCommitModel() {
+    }
+
+    public ProjectCommitModel(String longDescription, String projectVersion) {
+        this.longDescription = longDescription;
+        this.projectVersion = projectVersion;
+    }
+
     private String longDescription;
     private String projectVersion;
 

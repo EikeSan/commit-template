@@ -2,6 +2,8 @@ package atom.plugins.commit;
 
 import org.junit.Test;
 
+import java.util.Collections;
+
 import static org.junit.Assert.assertEquals;
 
 public class CommitMessageTest {
@@ -10,7 +12,7 @@ public class CommitMessageTest {
     public void testFormatCommit() {
         CommitMessage commitMessage = new CommitMessage(ChangeType.FIX, "ngStyle",
                 "skip setting empty value when new style has the property",
-                "Previously, all the properties in oldStyles are set to empty value once. Using AngularJS with jQuery 3.3.1, this disables the CSS transition as reported in jquery/jquery#4185.",
+                Collections.singletonList(new ProjectCommitModel("Previously, all the properties in oldStyles are set to empty value once. Using AngularJS with jQuery 3.3.1, this disables the CSS transition as reported in jquery/jquery#4185.", null)),
                 "#16709", "");
         String expected = "fix(ngStyle): skip setting empty value when new style has the property\n" +
                 "\n" +
@@ -25,7 +27,7 @@ public class CommitMessageTest {
     @Test
     public void testFormatCommit_withoutScope() {
         CommitMessage commitMessage = new CommitMessage(ChangeType.STYLE, "",
-                "fix eslint error", "", "", "");
+                "fix eslint error", Collections.emptyList(), "", "");
         String expected = "style: fix eslint error\n\n";
         assertEquals(expected, commitMessage.toString());
     }
@@ -34,7 +36,7 @@ public class CommitMessageTest {
     public void testFormatCommit_withMultipleClosedIssues() {
         CommitMessage commitMessage = new CommitMessage(ChangeType.FEAT, "$route",
                 "add support for the `reloadOnUrl` configuration option",
-                "Enables users to specify that a particular route should not be reloaded after a URL change.",
+                Collections.singletonList(new ProjectCommitModel("Enables users to specify that a particular route should not be reloaded after a URL change.", null)),
                 "#7925,#15002", "");
         String expected = "feat($route): add support for the `reloadOnUrl` configuration option\n" +
                 "\n" +
@@ -48,7 +50,7 @@ public class CommitMessageTest {
 
     @Test
     public void testFormatCommit_withLongBreakingChange() {
-        CommitMessage commitMessage = new CommitMessage(ChangeType.FEAT, "", "break everything","", "",
+        CommitMessage commitMessage = new CommitMessage(ChangeType.FEAT, "", "break everything", Collections.emptyList(), "",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
         String expected = "feat: break everything\n" +
                 "\n" +
